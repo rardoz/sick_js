@@ -1,0 +1,8 @@
+src_dir: "./"
+asset_paths:
+- assets/javascripts
+src_files:
+#- "spec/vendor/javascripts/jquery-2.2.1.min.js"
+
+#spec_files:
+#- "**/*[Ss]pec.{js,coffee}"
