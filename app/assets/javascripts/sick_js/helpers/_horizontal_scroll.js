@@ -4,6 +4,7 @@
 */
 
 (function($){
+    if(!$) return;
     $.fn.horizontalScroll = function (amount) {
         amount = amount || 120;
 
@@ -14,13 +15,13 @@
             .bind("mouseout", function(){
                 $(this).data("user_is_interacting", false);
             })
-            .bind("DOMMouseScroll mousewheel", function (event) {
+            .bind("DOMMouseScroll mousewheel", function (event, delta) {
                 var oEvent    = event.originalEvent,
-                    deltaX    = Math.abs(oEvent.wheelDeltaX),
-                    deltaY    = Math.abs(oEvent.wheelDeltaY);
+                    deltaX    = Math.abs(oEvent.wheelDeltaX || oEvent.deltaX),
+                    deltaY    = Math.abs(oEvent.wheelDeltaY || oEvent.deltaY);
 
                 if( $(this).data("user_is_interacting") && deltaX < deltaY ){
-                    var direction = oEvent.detail ? oEvent.detail * -amount : oEvent.wheelDelta,
+                    var direction = oEvent.detail ? oEvent.detail * -amount : (oEvent.wheelDelta || (event.deltaFactor * delta)),
                     position      = $(this).scrollLeft();
                     position     += direction > 0 ? -amount : amount;
 
